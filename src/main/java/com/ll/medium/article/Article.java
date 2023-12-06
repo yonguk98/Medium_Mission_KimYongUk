@@ -27,5 +27,5 @@ public class Article {
 
     private LocalDateTime dateTime;
 
-    private boolean isPublished;
+    private boolean isPublished = true;
 }
