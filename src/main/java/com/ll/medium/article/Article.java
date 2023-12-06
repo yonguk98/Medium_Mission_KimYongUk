@@ -1,9 +1,9 @@
 package com.ll.medium.article;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ll.medium.member.Member;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Article {
@@ -11,6 +11,13 @@ public class Article {
     private Long id;
 
     private String title;
+
     private String body;
+
+    @ManyToOne
+    private Member writer;
+
+    private LocalDateTime dateTime;
+
     private boolean isPublished;
 }
