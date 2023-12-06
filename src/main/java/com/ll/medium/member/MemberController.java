@@ -33,7 +33,7 @@ public class MemberController {
         }
 
         if (!memberCreateForm.getPassword().equals(memberCreateForm.getPasswordConfirm())) {
-            bindingResult.rejectValue("password2", "passwordInCorrect",
+            bindingResult.rejectValue("passwordConfirm", "passwordInCorrect",
                     "2개의 패스워드가 일치하지 않습니다.");
             return "signup_form";
         }
@@ -49,6 +49,6 @@ public class MemberController {
             return "signup_form";
         }
 
-        return "redirect:/";
+        return "redirect:/member/login";
     }
 }
