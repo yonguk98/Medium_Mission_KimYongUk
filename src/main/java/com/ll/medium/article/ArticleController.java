@@ -8,10 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.testng.TestNGAntTask;
 
 import java.security.Principal;
 import java.util.List;
@@ -52,4 +50,13 @@ public class ArticleController {
 
         return "redirect:/post/list";
     }
+
+    @GetMapping("/{articleId}")
+    public String articleDetail(@PathVariable("articleId") Integer articleId, Model model){
+        Article article = articleService.getArticleById(articleId);
+        model.addAttribute("article", article);
+
+        return "article_detail";
+    }
+
 }
