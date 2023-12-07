@@ -1,20 +1,15 @@
 package com.ll.medium.article;
 
 import com.ll.medium.member.Member;
-import com.ll.medium.member.MemberRepository;
 import com.ll.medium.member.MemberService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.testng.TestNGAntTask;
 
 import java.security.Principal;
 import java.util.List;
