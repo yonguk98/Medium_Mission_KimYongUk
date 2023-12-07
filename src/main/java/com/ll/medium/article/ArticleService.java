@@ -39,4 +39,14 @@ public class ArticleService {
         }
         return article.get();
     }
+
+    public void modify(Article article, ArticleForm articleForm) {
+        article = article.toBuilder()
+                .title(articleForm.getTitle())
+                .body(articleForm.getBody())
+                .dateTime(LocalDateTime.now())
+                .build();
+
+        articleRepository.save(article);
+    }
 }
