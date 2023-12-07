@@ -5,10 +5,13 @@ import com.ll.medium.member.MemberRepository;
 import com.ll.medium.member.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.testng.TestNGAntTask;
 
 import java.security.Principal;
@@ -57,6 +60,19 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return "article_detail";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{articleId}/modify")
+    public String modifyArticle(@PathVariable("articleId") Integer articleId, Principal principal, ArticleForm articleForm){
+        Article article = articleService.getArticleById(articleId);
+
+        if(!article.getWriter().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        articleForm.setTitle(article.getTitle());
+        articleForm.setBody(article.getBody());
+        return "article_form";
     }
 
 }
