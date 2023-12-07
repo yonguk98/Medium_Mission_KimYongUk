@@ -1,5 +1,6 @@
 package com.ll.medium;
 
+import com.ll.medium.article.ArticleForm;
 import com.ll.medium.article.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
@@ -13,8 +14,12 @@ public class NotProd {
 
     @Bean
     public ApplicationRunner initNotProd() {
-        return args -> {
+        ArticleForm articleForm = new ArticleForm();
+        articleForm.setTitle("title1");
+        articleForm.setBody("body1");
 
+        return args -> {
+            articleService.createArticle(articleForm);
         };
     }
 }

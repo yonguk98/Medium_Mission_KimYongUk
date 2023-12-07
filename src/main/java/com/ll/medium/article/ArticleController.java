@@ -41,8 +41,13 @@ public class ArticleController {
             return "article_form";
         }
 
-        Member member = memberService.getMemberByUsername(principal.getName());
-        articleForm.setWriter(member);
+        try{
+            principal.getName();
+            Member member = memberService.getMemberByUsername(principal.getName());
+            articleForm.setWriter(member);
+        } catch (NullPointerException e){
+            articleForm.setWriter(null);
+        }
         articleService.createArticle(articleForm);
 
         return "redirect:/post/list";
