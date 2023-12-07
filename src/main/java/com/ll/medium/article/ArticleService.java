@@ -21,6 +21,7 @@ public class ArticleService {
         Article article = Article.builder()
                 .title(articleForm.getTitle())
                 .body(articleForm.getBody())
+                .writer(articleForm.getWriter())
                 .isPublished(articleForm.isPublished())
                 .dateTime(LocalDateTime.now())
                 .build();

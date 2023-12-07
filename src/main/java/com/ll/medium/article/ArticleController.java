@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/article")
+@RequestMapping("/post")
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -30,12 +30,12 @@ public class ArticleController {
         model.addAttribute(articles);
         return "article_list";
     }
-    @GetMapping("/create")
+    @GetMapping("/write")
     public String create(ArticleForm articleForm){
         return "article_form";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/write")
     public String create(@ModelAttribute ArticleForm articleForm, BindingResult bindingResult, Principal principal){
         if(bindingResult.hasErrors()){
             return "article_form";
@@ -45,6 +45,6 @@ public class ArticleController {
         articleForm.setWriter(member);
         articleService.createArticle(articleForm);
 
-        return "redirect:/article/list";
+        return "redirect:/post/list";
     }
 }
