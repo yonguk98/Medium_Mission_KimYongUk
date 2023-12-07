@@ -2,6 +2,9 @@ package com.ll.medium;
 
 import com.ll.medium.article.ArticleForm;
 import com.ll.medium.article.ArticleService;
+import com.ll.medium.member.Member;
+import com.ll.medium.member.MemberCreateForm;
+import com.ll.medium.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -11,15 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class NotProd {
     private final ArticleService articleService;
+    private final MemberService memberService;
 
     @Bean
     public ApplicationRunner initNotProd() {
-        ArticleForm articleForm = new ArticleForm();
-        articleForm.setTitle("title1");
-        articleForm.setBody("body1");
+        for (int i = 1; i < 101; i++) {
+            MemberCreateForm memberCreateForm = new MemberCreateForm();
+            memberCreateForm.setUsername("user"+i);
+            memberCreateForm.setPassword("1234");
+            memberService.create(memberCreateForm);
 
-        return args -> {
+            ArticleForm articleForm = new ArticleForm();
+            articleForm.setTitle("title"+i);
+            articleForm.setBody("body"+i);
+            articleForm.setWriter(memberService.getMemberByUsername("user"+i));
             articleService.createArticle(articleForm);
-        };
+        }
+        return args -> {};
     }
 }
