@@ -66,6 +66,6 @@ public class ArticleService {
 
 
     public void addHit(Article article) {
-        article.toBuilder().hit(article.getHit()+1).build();
+        articleRepository.save(article.toBuilder().hit(article.getHit()+1).build());
     }
 }

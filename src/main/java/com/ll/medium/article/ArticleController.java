@@ -55,6 +55,7 @@ public class ArticleController {
     @GetMapping("/{articleId}")
     public String articleDetail(@PathVariable("articleId") Integer articleId, Model model){
         Article article = articleService.getArticleById(articleId);
+        articleService.addHit(article);
         model.addAttribute("article", article);
 
         return "article_detail";
@@ -135,10 +136,10 @@ public class ArticleController {
         return "article_detail";
     }
 
-    @PostMapping("/{articleId}/increaseHit")
-    public String increaseHit(@PathVariable("articleId") Integer id, Model model){
-        articleService.addHit(articleService.getArticleById(id));
-        return "redirect:/post/"+id;
-    }
+//    @PostMapping("/{articleId}/increaseHit")
+//    public String increaseHit(@PathVariable("articleId") Integer id, Model model){
+//        articleService.addHit(articleService.getArticleById(id));
+//        return "redirect:/post/"+id;
+//    }
 
 }
