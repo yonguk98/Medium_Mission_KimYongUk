@@ -2,6 +2,7 @@ package com.ll.medium.article;
 
 import com.ll.medium.member.Member;
 import com.ll.medium.member.MemberService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -107,6 +108,31 @@ public class ArticleController {
         articleService.deleteArticle(article);
 
         return "redirect:/post/list";
+    }
+
+    @GetMapping("/b/{username}")
+    public String articlesByUsername(@PathVariable("username") String username, Model model){
+        Member writer = memberService.getMemberByUsername(username);
+
+        List<Article> articles = articleService.getAllArticlesByWriter(writer);
+
+        if(articles.size()==0){
+            return "redirect:/post/list";
+        }
+        model.addAttribute("articleList",articles);
+        return "article_list";
+    }
+
+    @GetMapping("/b/{username}/{articleId}")
+    public String articleDetailByUsernameAndArticleId(@PathVariable("username") String username, @PathVariable("articleId") Integer articleId, Model model){
+        Member writer = memberService.getMemberByUsername(username);
+
+        List<Article> articles = articleService.getAllArticlesByWriter(writer);
+        if(articles.size()==0){
+            return "redirect:/post/list";
+        }
+        model.addAttribute("article", articles.get(articleId-1));
+        return "article_detail";
     }
 
 }

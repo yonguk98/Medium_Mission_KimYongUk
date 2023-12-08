@@ -2,6 +2,9 @@ package com.ll.medium.article;
 
 
 import com.ll.medium.DataNotFoundException;
+import com.ll.medium.member.Member;
+import com.ll.medium.member.MemberRepository;
+import com.ll.medium.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ import java.util.Optional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final MemberService memberService;
 
     public List<Article> getAllArticles(){
         return articleRepository.findAll();
@@ -52,5 +56,10 @@ public class ArticleService {
 
     public void deleteArticle(Article article) {
         articleRepository.delete(article);
+    }
+
+    public List<Article> getAllArticlesByWriter(Member writer) {
+        // null 이면??
+        return articleRepository.findAllByWriter(writer);
     }
 }
