@@ -64,8 +64,11 @@ public class ArticleService {
         return articleRepository.findAllByWriter(writer);
     }
 
-
     public void addHit(Article article) {
         articleRepository.save(article.toBuilder().hit(article.getHit()+1).build());
+    }
+    public void addLike(Article article, Member member){
+        article.getLike().add(member);
+        articleRepository.save(article);
     }
 }

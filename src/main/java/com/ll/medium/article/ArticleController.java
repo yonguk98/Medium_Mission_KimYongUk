@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 @Controller
 @RequiredArgsConstructor
@@ -134,6 +135,15 @@ public class ArticleController {
         }
         model.addAttribute("article", articles.get(articleId-1));
         return "article_detail";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{articleId}/like")
+    public String articleLike(@PathVariable("articleId") Integer id, Principal principal){
+        Article article = articleService.getArticleById(id);
+        Member member = memberService.getMemberByUsername(principal.getName());
+        articleService.addLike(article,member);
+        return "redirect:/post/"+id;
     }
 
 //    @PostMapping("/{articleId}/increaseHit")

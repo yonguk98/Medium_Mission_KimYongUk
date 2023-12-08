@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,4 +33,7 @@ public class Article {
 
     @Builder.Default
     private boolean isPublished = true;
+
+    @ManyToMany
+    private Set<Member> like;
 }
