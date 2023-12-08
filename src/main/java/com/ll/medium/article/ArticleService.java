@@ -49,4 +49,8 @@ public class ArticleService {
 
         articleRepository.save(article);
     }
+
+    public void deleteArticle(Article article) {
+        articleRepository.delete(article);
+    }
 }

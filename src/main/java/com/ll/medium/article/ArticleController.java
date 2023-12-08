@@ -91,4 +91,22 @@ public class ArticleController {
 
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{articleId}/delete")
+    public String deleteArticle(@PathVariable("articleId") Integer id, Principal principal, ArticleForm articleForm, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "redirect:/post/"+id;
+        }
+
+        Article article = articleService.getArticleById(id);
+
+        if(!article.getWriter().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+
+        articleService.deleteArticle(article);
+
+        return "redirect:/post/list";
+    }
+
 }

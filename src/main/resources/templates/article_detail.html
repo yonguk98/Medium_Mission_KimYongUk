@@ -28,10 +28,10 @@
            sec:authorize="isAuthenticated()"
            th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == article.writer.username}"
            th:text="수정"></a>
-<!--        <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}"-->
-<!--           class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"-->
-<!--           th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"-->
-<!--           th:text="삭제"></a>-->
+        <a href="javascript:void(0);" th:data-uri="@{|/post/${article.id}/delete|}"
+           class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+           th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == article.writer.username}"
+           th:text="삭제"></a>
     </div>
 <!--    &lt;!&ndash; 답변의 갯수 표시 &ndash;&gt;-->
 <!--    <h5 class="border-bottom my-3 py-2"-->
@@ -79,15 +79,15 @@
 <!--        <input type="submit" value="답변등록" class="btn btn-primary my-2">-->
 <!--    </form>-->
 </div>
-<!--<script layout:fragment="script" type='text/javascript'>-->
-<!--    const delete_elements = document.getElementsByClassName("delete");-->
-<!--    Array.from(delete_elements).forEach(function(element) {-->
-<!--        element.addEventListener('click', function() {-->
-<!--            if(confirm("정말로 삭제하시겠습니까?")) {-->
-<!--                location.href = this.dataset.uri;-->
-<!--            };-->
-<!--        });-->
-<!--    });-->
+<script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
 
 <!--    const recommend_elements = document.getElementsByClassName("recommend");-->
 <!--    Array.from(recommend_elements).forEach(function(element) {-->
@@ -98,5 +98,5 @@
 <!--        });-->
 <!--    });-->
 
-<!--</script>-->
+</script>
 </html>

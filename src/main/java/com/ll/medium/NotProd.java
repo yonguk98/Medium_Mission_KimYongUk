@@ -18,7 +18,7 @@ public class NotProd {
 
     @Bean
     public ApplicationRunner initNotProd() {
-        for (int i = 1; i < 101; i++) {
+        for (int i = 1; i < 51; i++) {
             MemberCreateForm memberCreateForm = new MemberCreateForm();
             memberCreateForm.setUsername("user"+i);
             memberCreateForm.setPassword("1234");
