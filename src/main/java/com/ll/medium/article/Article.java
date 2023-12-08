@@ -27,5 +27,7 @@ public class Article {
 
     private LocalDateTime dateTime;
 
+    private Long hit = 0L;
+
     private boolean isPublished = true;
 }

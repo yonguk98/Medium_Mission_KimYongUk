@@ -5,6 +5,7 @@ import com.ll.medium.DataNotFoundException;
 import com.ll.medium.member.Member;
 import com.ll.medium.member.MemberRepository;
 import com.ll.medium.member.MemberService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,10 @@ public class ArticleService {
     public List<Article> getAllArticlesByWriter(Member writer) {
         // null 이면??
         return articleRepository.findAllByWriter(writer);
+    }
+
+
+    public void addHit(Article article) {
+        article.toBuilder().hit(article.getHit()+1).build();
     }
 }

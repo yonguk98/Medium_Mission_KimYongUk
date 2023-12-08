@@ -135,4 +135,10 @@ public class ArticleController {
         return "article_detail";
     }
 
+    @PostMapping("/{articleId}/increaseHit")
+    public String increaseHit(@PathVariable("articleId") Integer id, Model model){
+        articleService.addHit(articleService.getArticleById(id));
+        return "redirect:/post/"+id;
+    }
+
 }
