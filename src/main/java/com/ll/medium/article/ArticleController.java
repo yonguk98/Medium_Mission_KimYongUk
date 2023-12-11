@@ -1,5 +1,6 @@
 package com.ll.medium.article;
 
+import com.ll.medium.comment.CommentForm;
 import com.ll.medium.member.Member;
 import com.ll.medium.member.MemberService;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -54,7 +55,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{articleId}")
-    public String articleDetail(@PathVariable("articleId") Integer articleId, Model model){
+    public String articleDetail(@PathVariable("articleId") Integer articleId, Model model, CommentForm commentForm){
         Article article = articleService.getArticleById(articleId);
         articleService.addHit(article);
         model.addAttribute("article", article);
