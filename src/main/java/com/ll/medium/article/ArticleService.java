@@ -71,4 +71,9 @@ public class ArticleService {
         article.getLike().add(member);
         articleRepository.save(article);
     }
+    public void subLike(Article article, Member member){
+        article.getLike().remove(member);
+        articleRepository.save(article);
+    }
+
 }

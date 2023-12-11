@@ -138,11 +138,19 @@ public class ArticleController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{articleId}/like")
+    @GetMapping("/{articleId}/like")
     public String articleLike(@PathVariable("articleId") Integer id, Principal principal){
         Article article = articleService.getArticleById(id);
         Member member = memberService.getMemberByUsername(principal.getName());
         articleService.addLike(article,member);
+        return "redirect:/post/"+id;
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{articleId}/likeCancel")
+    public String articleLikeCancel(@PathVariable("articleId") Integer id, Principal principal){
+        Article article = articleService.getArticleById(id);
+        Member member = memberService.getMemberByUsername(principal.getName());
+        articleService.subLike(article,member);
         return "redirect:/post/"+id;
     }
 
