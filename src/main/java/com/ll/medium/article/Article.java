@@ -37,7 +37,4 @@ public class Article {
 
     @ManyToMany
     private Set<Member> like;
-
-    @OneToMany
-    private Set<Comment> comments;
 }
