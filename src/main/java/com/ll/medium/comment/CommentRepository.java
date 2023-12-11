@@ -1,2 +1,4 @@
-package com.ll.medium.comment;public interface CommentRepository {
+package com.ll.medium.comment;
+
+public interface CommentRepository {
 }

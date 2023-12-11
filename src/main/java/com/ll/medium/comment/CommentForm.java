@@ -1,2 +1,4 @@
-package com.ll.medium.comment;public class commentForm {
+package com.ll.medium.comment;
+
+public class CommentForm {
 }

@@ -1,2 +1,4 @@
-package com.ll.medium.comment;public class Comment {
+package com.ll.medium.comment;
+
+public class Comment {
 }

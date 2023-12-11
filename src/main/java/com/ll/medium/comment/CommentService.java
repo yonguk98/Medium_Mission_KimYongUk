@@ -1,2 +1,4 @@
-package com.ll.medium.comment;public class CommentService {
+package com.ll.medium.comment;
+
+public class CommentService {
 }
