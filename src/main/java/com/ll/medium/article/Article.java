@@ -1,5 +1,6 @@
 package com.ll.medium.article;
 
+import com.ll.medium.comment.Comment;
 import com.ll.medium.member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,4 +37,7 @@ public class Article {
 
     @ManyToMany
     private Set<Member> like;
+
+    @OneToMany
+    private Set<Comment> comments;
 }
