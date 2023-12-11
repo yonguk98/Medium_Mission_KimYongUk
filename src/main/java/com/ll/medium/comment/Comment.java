@@ -1,5 +1,6 @@
 package com.ll.medium.comment;
 
+import com.ll.medium.article.Article;
 import com.ll.medium.member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,11 +17,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    String body;
-    LocalDateTime dateTime;
+    private String body;
+    private LocalDateTime dateTime;
 
     @ManyToOne
-    Member writer;
+    private Article article;
+
+    @ManyToOne
+    private Member writer;
 }

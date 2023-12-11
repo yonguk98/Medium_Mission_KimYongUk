@@ -37,51 +37,51 @@
            th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == article.writer.username}"
            th:text="삭제"></a>
     </div>
-<!--    &lt;!&ndash; 답변의 갯수 표시 &ndash;&gt;-->
-<!--    <h5 class="border-bottom my-3 py-2"-->
-<!--        th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>-->
-<!--    &lt;!&ndash; 답변 반복 시작 &ndash;&gt;-->
-<!--    <div class="card my-3" th:each="answer : ${question.answerList}">-->
-<!--        <a th:id="|answer_${answer.id}|"></a>-->
-<!--        <div class="card-body">-->
+    <!-- 답변의 갯수 표시 -->
+    <h5 class="border-bottom my-3 py-2"
+        th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
+    <!-- 답변 반복 시작 -->
+    <div class="card my-3" th:each="comment : ${article.commentList}">
+        <a th:id="|comment_${comment.id}|"></a>
+        <div class="card-body">
 <!--            <div class="card-text" th:utext="${@commonUtil.markdown(answer.content)}"></div>-->
-<!--            <div class="d-flex justify-content-end">-->
-<!--                <div th:if="${answer.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">-->
-<!--                    <div class="mb-2">modified at</div>-->
-<!--                    <div th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>-->
-<!--                </div>-->
-<!--                <div class="badge bg-light text-dark p-2 text-start">-->
-<!--                    <div class="mb-2">-->
-<!--                        <span th:if="${answer.author != null}" th:text="${answer.author.username}"></span>-->
-<!--                    </div>-->
-<!--                    <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="d-flex justify-content-end">
+                <div th:if="${comment.dateTime != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">written at</div>
+                    <div th:text="${#temporals.format(comment.dateTime, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">
+                        <span th:if="${comment.writer != null}" th:text="${comment.writer.username}"></span>
+                    </div>
+                    <div th:text="${#temporals.format(comment.dateTime, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </div>
 <!--            <div class="my-3">-->
-<!--                <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"-->
-<!--                   th:data-uri="@{|/answer/vote/${answer.id}|}">-->
-<!--                    추천-->
-<!--                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>-->
-<!--                </a>-->
-<!--                <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"-->
-<!--                   sec:authorize="isAuthenticated()"-->
-<!--                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"-->
-<!--                   th:text="수정"></a>-->
-<!--                <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"-->
-<!--                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"-->
-<!--                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"-->
-<!--                   th:text="삭제"></a>-->
+<!--&lt;!&ndash;                <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:data-uri="@{|/answer/vote/${answer.id}|}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    추천&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"&ndash;&gt;-->
+<!--&lt;!&ndash;                   sec:authorize="isAuthenticated()"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:text="수정"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"&ndash;&gt;-->
+<!--&lt;!&ndash;                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:text="삭제"></a>&ndash;&gt;-->
 <!--            </div>-->
 <!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; 답변 반복 끝  &ndash;&gt;-->
-<!--    &lt;!&ndash; 답변 작성 &ndash;&gt;-->
-<!--    <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">-->
-<!--        <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
-<!--        <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"></textarea>-->
-<!--        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>-->
-<!--        <input type="submit" value="답변등록" class="btn btn-primary my-2">-->
-<!--    </form>-->
+    </div>
+    <!-- 답변 반복 끝  -->
+    <!-- 답변 작성 -->
+    <form th:action="@{|/post/${article.id}/comment/write|}" th:object="${commentForm}" method="post" class="my-3">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <textarea sec:authorize="isAnonymous()" disabled th:field="*{body}" class="form-control" rows="10"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{body}" class="form-control" rows="10"></textarea>
+        <input type="submit" value="댓글등록" class="btn btn-primary my-2">
+    </form>
 </div>
 <script layout:fragment="script" type='text/javascript'>
     const delete_elements = document.getElementsByClassName("delete");
