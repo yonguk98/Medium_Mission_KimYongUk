@@ -44,7 +44,6 @@
     <div class="card my-3" th:each="comment : ${article.commentList}">
         <a th:id="|comment_${comment.id}|"></a>
         <div class="card-body">
-<!--            <div class="card-text" th:utext="${@commonUtil.markdown(answer.content)}"></div>-->
             <div class="d-flex justify-content-end">
                 <div th:if="${comment.dateTime != null}" class="badge bg-light text-dark p-2 text-start mx-3">
                     <div class="mb-2">written at</div>
@@ -57,22 +56,22 @@
                     <div th:text="${#temporals.format(comment.dateTime, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
-<!--            <div class="my-3">-->
-<!--&lt;!&ndash;                <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"&ndash;&gt;-->
-<!--&lt;!&ndash;                   th:data-uri="@{|/answer/vote/${answer.id}|}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    추천&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;                </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"&ndash;&gt;-->
-<!--&lt;!&ndash;                   sec:authorize="isAuthenticated()"&ndash;&gt;-->
-<!--&lt;!&ndash;                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"&ndash;&gt;-->
-<!--&lt;!&ndash;                   th:text="수정"></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"&ndash;&gt;-->
-<!--&lt;!&ndash;                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"&ndash;&gt;-->
-<!--&lt;!&ndash;                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"&ndash;&gt;-->
-<!--&lt;!&ndash;                   th:text="삭제"></a>&ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
+            <div class="my-3">
+<!--                <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"-->
+<!--                   th:data-uri="@{|/answer/vote/${answer.id}|}">-->
+<!--                    추천-->
+<!--                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>-->
+<!--                </a>-->
+<!--                <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"-->
+<!--                   sec:authorize="isAuthenticated()"-->
+<!--                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"-->
+<!--                   th:text="수정"></a>-->
+<!--                <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"-->
+<!--                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"-->
+<!--                   th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"-->
+<!--                   th:text="삭제"></a>-->
+            </div>
+        </div>
     </div>
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
