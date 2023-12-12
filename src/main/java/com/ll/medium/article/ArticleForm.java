@@ -13,5 +13,5 @@ public class ArticleForm {
     private String body;
     private Member writer;
     private LocalDateTime dateTime = LocalDateTime.now();
-    private boolean isPublished;
+    private boolean publish = true;
 }

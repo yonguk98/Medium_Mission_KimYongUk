@@ -37,7 +37,7 @@ public class ArticleService {
                 .title(articleForm.getTitle())
                 .body(articleForm.getBody())
                 .writer(articleForm.getWriter())
-                .isPublished(articleForm.isPublished())
+                .isPublished(articleForm.isPublish())
                 .dateTime(LocalDateTime.now())
                 .build();
 

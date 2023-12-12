@@ -13,8 +13,8 @@
             <textarea th:field="*{body}" class="form-control" rows="10"></textarea>
         </div>
         <div class="mb-3">
-            <label for="is_published" class="form-label">공개 설정</label>
-            <input type="checkbox"/>
+            <label for="isPublished" class="form-label">공개 설정</label>
+            <input type="checkbox" name="publish" th:checked th:field="*{publish}"/>
         </div>
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
