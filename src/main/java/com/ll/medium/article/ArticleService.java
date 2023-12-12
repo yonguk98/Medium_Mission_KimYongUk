@@ -27,9 +27,18 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    public Page<Article> getAllArticlesByUsername(int page, Member member){
+        Pageable pageable = PageRequest.of(page,30);
+        return articleRepository.findAllByWriter(pageable,member);
+    }
+
     public Page<Article> getPageList(int page) {
         Pageable pageable = PageRequest.of(page, 30);
         return articleRepository.findAll(pageable);
+    }
+    public Page<Article> getPublishedPageList(int page){
+        Pageable pageable = PageRequest.of(page, 30);
+        return articleRepository.findAllByIsPublished(pageable, true);
     }
 
     public void createArticle(ArticleForm articleForm){

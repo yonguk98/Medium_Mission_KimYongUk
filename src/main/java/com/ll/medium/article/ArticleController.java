@@ -29,9 +29,17 @@ public class ArticleController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page){
-        Page<Article> articles = articleService.getPageList(page);
+        Page<Article> articles = articleService.getPublishedPageList(page);
         model.addAttribute("articleList",articles);
         return "article_list";
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myList")
+    public String myList(Model model, @RequestParam(value="page", defaultValue="0") int page, Principal principal){
+        Member member = memberService.getMemberByUsername(principal.getName());
+        Page<Article> articles = articleService.getAllArticlesByUsername(page, member);
+        model.addAttribute("articleList",articles);
+        return "article_mylist";
     }
     @GetMapping("/write")
     public String create(ArticleForm articleForm){
