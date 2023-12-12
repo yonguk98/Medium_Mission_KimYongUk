@@ -23,9 +23,14 @@
         </div>
     </div>
     <div class="my-3">
-        <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+        <a th:if="${!article.like.contains(member)}" href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
            th:data-uri="@{|/post/${article.id}/like|}">
             추천
+            <span class="badge rounded-pill bg-success" th:text="${#lists.size(article.like)}"></span>
+        </a>
+        <a th:if="${article.like.contains(member)}" href="javascript:void(0);" class="recommendCancel btn btn-sm btn-outline-secondary"
+           th:data-uri="@{|/post/${article.id}/likeCancel|}">
+            추천취소
             <span class="badge rounded-pill bg-success" th:text="${#lists.size(article.like)}"></span>
         </a>
         <a th:href="@{|/post/${article.id}/modify|}" class="btn btn-sm btn-outline-secondary"
@@ -97,6 +102,14 @@
     Array.from(recommend_elements).forEach(function(element) {-
         element.addEventListener('click', function() {
             if(confirm("정말로 추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+    const recommendCancel_elements = document.getElementsByClassName("recommendCancel");
+    Array.from(recommendCancel_elements).forEach(function(element) {-
+        element.addEventListener('click', function() {
+            if(confirm("정말로 추천취소하시겠습니까?")) {
                 location.href = this.dataset.uri;
             };
         });

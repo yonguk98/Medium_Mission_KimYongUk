@@ -45,7 +45,6 @@ public class ArticleController {
         }
 
         try{
-            principal.getName();
             Member member = memberService.getMemberByUsername(principal.getName());
             articleForm.setWriter(member);
         } catch (NullPointerException e){
@@ -57,10 +56,17 @@ public class ArticleController {
     }
 
     @GetMapping("/{articleId}")
-    public String articleDetail(@PathVariable("articleId") Integer articleId, Model model, CommentForm commentForm){
+    public String articleDetail(@PathVariable("articleId") Integer articleId, Model model, CommentForm commentForm, Principal principal){
         Article article = articleService.getArticleById(articleId);
         articleService.addHit(article);
         model.addAttribute("article", article);
+
+        try{
+            Member loginedMember = memberService.getMemberByUsername(principal.getName());
+            model.addAttribute("member",loginedMember);
+        }catch (NullPointerException e){
+            model.addAttribute("member",null);
+        }
 
         return "article_detail";
     }
