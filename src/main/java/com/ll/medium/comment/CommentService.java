@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,9 @@ public class CommentService {
         }
 
         return commentOp.get();
+    }
+    public List<Comment> getCommentListByArticle(Article article){
+        return commentRepository.findAllByArticle(article);
     }
 
     public void createComment(CommentForm commentForm, Article article, Member member){

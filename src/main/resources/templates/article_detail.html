@@ -46,7 +46,7 @@
     <h5 class="border-bottom my-3 py-2"
         th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
     <!-- 댓글 반복 시작 -->
-    <div class="card my-3" th:each="comment : ${article.commentList}">
+    <div class="card my-3" th:each="comment,commentStat : ${article.commentList}">
         <a th:id="|comment_${comment.id}|"></a>
         <div class="card-body">
             <div class="card-text" th:utext="${comment.body}"></div>
@@ -68,11 +68,11 @@
 <!--                    추천-->
 <!--                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>-->
 <!--                </a>-->
-                <a th:href="@{|/post/${article.id}/comment/${comment.id}/modify|}" class="btn btn-sm btn-outline-secondary"
+                <a th:href="@{|/post/${article.id}/comment/${commentStat.count}/modify|}" class="btn btn-sm btn-outline-secondary"
                    sec:authorize="isAuthenticated()"
                    th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == comment.writer.username}"
                    th:text="수정"></a>
-                <a href="javascript:void(0);" th:data-uri="@{|/post/${article.id}/comment/${comment.id}/delete|}"
+                <a href="javascript:void(0);" th:data-uri="@{|/post/${article.id}/comment/${commentStat.count}/delete|}"
                    class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
                    th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == comment.writer.username}"
                    th:text="삭제"></a>

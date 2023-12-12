@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.testng.TestNGAntTask;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -52,12 +53,14 @@ public class CommentController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{commentId}/modify")
     public String modifyComment(@PathVariable("articleId") Integer articleId,
-                                @PathVariable("commentId") Integer commentId,
+                                @PathVariable("commentId") Integer commentNumber,
                                 CommentForm commentForm,
                                 Principal principal,
                                 Model model){
 
-        Comment comment = commentService.getCommentById(commentId);
+        Article article = articleService.getArticleById(articleId);
+        List<Comment> commentList = commentService.getCommentListByArticle(article);
+        Comment comment = commentList.get(commentNumber-1);
 
         if(!comment.getWriter().getUsername().equals(principal.getName())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
@@ -90,11 +93,20 @@ public class CommentController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{commentId}/delete")
-    public String deleteComment(@PathVariable("commentId") Integer commentId,
+    @GetMapping("/{commentId}/delete")
+    public String deleteComment(@PathVariable("commentId") Integer commentNumber,
                                 @PathVariable("articleId") Integer articleId,
                                 Principal principal){
-        return "";
-    }
 
+        Article article = articleService.getArticleById(articleId);
+        List<Comment> commentList = commentService.getCommentListByArticle(article);
+        Comment comment = commentList.get(commentNumber-1);
+
+        if(!comment.getWriter().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+
+        commentService.deleteComment(comment);
+        return "redirect:/post/"+comment.getArticle().getId();
+    }
 }
