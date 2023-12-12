@@ -4,6 +4,7 @@ import com.ll.medium.comment.CommentForm;
 import com.ll.medium.member.Member;
 import com.ll.medium.member.MemberService;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +48,7 @@ public class ArticleController {
     }
 
     @PostMapping("/write")
-    public String create(@ModelAttribute ArticleForm articleForm, BindingResult bindingResult, Principal principal){
+    public String create(@Valid ArticleForm articleForm, BindingResult bindingResult, Principal principal){
         if(bindingResult.hasErrors()){
             return "article_form";
         }
