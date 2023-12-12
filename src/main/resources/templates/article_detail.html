@@ -68,11 +68,11 @@
 <!--                    추천-->
 <!--                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>-->
 <!--                </a>-->
-                <a th:href="@{|/post/${article.id}/${comment.id}/modify|}" class="btn btn-sm btn-outline-secondary"
+                <a th:href="@{|/post/${article.id}/comment/${comment.id}/modify|}" class="btn btn-sm btn-outline-secondary"
                    sec:authorize="isAuthenticated()"
                    th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == comment.writer.username}"
                    th:text="수정"></a>
-                <a href="javascript:void(0);" th:data-uri="@{|/post/${article.id}/${comment.id}/delete|}"
+                <a href="javascript:void(0);" th:data-uri="@{|/post/${article.id}/comment/${comment.id}/delete|}"
                    class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
                    th:if="${article.writer != null and #authentication.getPrincipal().getUsername() == comment.writer.username}"
                    th:text="삭제"></a>
