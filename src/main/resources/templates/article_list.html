@@ -21,7 +21,7 @@
             <td class="text-center">
                 <a th:href="@{|/post/${article.id}|}" th:text="${article.title}"></a>
 <!--                <span class="text-danger small ms-2"-->
-<!--                      th:if="${#lists.size(question.answerList) > 0}"-->
+<!--                      th:if="${#lists.size(article.answerList) > 0}"-->
 <!--                      th:text="${#lists.size(question.answerList)}">-->
 <!--                    </span>-->
             </td>
@@ -31,4 +31,27 @@
         </tr>
         </tbody>
     </table>
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!articleList.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!articleList.hasPrevious} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${articleList.number}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="pageNumber: ${#numbers.sequence(1, articleList.totalPages)}"
+                th:if="${pageNumber >= articleList.number-2 and pageNumber <= articleList.number+2}"
+                th:classappend="${pageNumber == articleList.number} ? 'active'"
+                class="page-item">
+                <a th:text="${pageNumber}" class="page-link" th:href="@{|?page=${pageNumber - 1}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!articleList.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${articleList.number}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
 </div>

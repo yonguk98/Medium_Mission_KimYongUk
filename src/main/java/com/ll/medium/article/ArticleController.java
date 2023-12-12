@@ -5,6 +5,8 @@ import com.ll.medium.member.Member;
 import com.ll.medium.member.MemberService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -26,9 +28,9 @@ public class ArticleController {
     private final MemberService memberService;
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<Article> articles = articleService.getAllArticles();
-        model.addAttribute(articles);
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page){
+        Page<Article> articles = articleService.getPageList(page);
+        model.addAttribute("articleList",articles);
         return "article_list";
     }
     @GetMapping("/write")

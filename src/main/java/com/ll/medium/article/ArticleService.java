@@ -7,6 +7,9 @@ import com.ll.medium.member.MemberRepository;
 import com.ll.medium.member.MemberService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +25,11 @@ public class ArticleService {
 
     public List<Article> getAllArticles(){
         return articleRepository.findAll();
+    }
+
+    public Page<Article> getPageList(int page) {
+        Pageable pageable = PageRequest.of(page, 30);
+        return articleRepository.findAll(pageable);
     }
 
     public void createArticle(ArticleForm articleForm){
