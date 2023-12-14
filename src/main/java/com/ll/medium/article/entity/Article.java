@@ -1,7 +1,7 @@
-package com.ll.medium.article;
+package com.ll.medium.article.entity;
 
-import com.ll.medium.comment.Comment;
-import com.ll.medium.member.Member;
+import com.ll.medium.comment.entity.Comment;
+import com.ll.medium.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,9 @@
 package com.ll.medium;
 
-import com.ll.medium.article.ArticleForm;
+import com.ll.medium.article.entity.ArticleForm;
 import com.ll.medium.article.ArticleService;
-import com.ll.medium.member.Member;
-import com.ll.medium.member.MemberCreateForm;
-import com.ll.medium.member.MemberService;
+import com.ll.medium.member.entity.MemberCreateForm;
+import com.ll.medium.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;

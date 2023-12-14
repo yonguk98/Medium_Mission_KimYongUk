@@ -1,6 +1,6 @@
-package com.ll.medium.article;
+package com.ll.medium.article.entity;
 
-import com.ll.medium.member.Member;
+import com.ll.medium.member.entity.Member;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;

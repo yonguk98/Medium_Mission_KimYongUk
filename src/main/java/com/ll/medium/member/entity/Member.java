@@ -1,4 +1,4 @@
-package com.ll.medium.member;
+package com.ll.medium.member.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

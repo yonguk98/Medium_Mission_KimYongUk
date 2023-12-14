@@ -1,6 +1,7 @@
 package com.ll.medium.article;
 
-import com.ll.medium.member.Member;
+import com.ll.medium.article.entity.Article;
+import com.ll.medium.member.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

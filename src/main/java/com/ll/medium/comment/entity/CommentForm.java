@@ -1,4 +1,4 @@
-package com.ll.medium.comment;
+package com.ll.medium.comment.entity;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

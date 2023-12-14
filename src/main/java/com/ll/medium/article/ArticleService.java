@@ -2,10 +2,10 @@ package com.ll.medium.article;
 
 
 import com.ll.medium.DataNotFoundException;
-import com.ll.medium.member.Member;
-import com.ll.medium.member.MemberRepository;
-import com.ll.medium.member.MemberService;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.ll.medium.article.entity.Article;
+import com.ll.medium.article.entity.ArticleForm;
+import com.ll.medium.member.entity.Member;
+import com.ll.medium.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

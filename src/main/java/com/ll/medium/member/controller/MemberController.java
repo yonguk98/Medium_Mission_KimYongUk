@@ -1,5 +1,7 @@
-package com.ll.medium.member;
+package com.ll.medium.member.controller;
 
+import com.ll.medium.member.entity.MemberCreateForm;
+import com.ll.medium.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

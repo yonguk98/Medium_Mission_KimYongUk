@@ -1,10 +1,10 @@
 package com.ll.medium.comment;
 
 import com.ll.medium.DataNotFoundException;
-import com.ll.medium.article.Article;
-import com.ll.medium.article.ArticleForm;
-import com.ll.medium.member.Member;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.ll.medium.article.entity.Article;
+import com.ll.medium.comment.entity.Comment;
+import com.ll.medium.comment.entity.CommentForm;
+import com.ll.medium.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,7 @@
-package com.ll.medium.member;
+package com.ll.medium.member.service;
+import com.ll.medium.member.entity.Member;
+import com.ll.medium.member.entity.MemberRole;
+import com.ll.medium.member.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

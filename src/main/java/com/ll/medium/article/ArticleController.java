@@ -1,13 +1,13 @@
 package com.ll.medium.article;
 
-import com.ll.medium.comment.CommentForm;
-import com.ll.medium.member.Member;
-import com.ll.medium.member.MemberService;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.ll.medium.article.entity.Article;
+import com.ll.medium.article.entity.ArticleForm;
+import com.ll.medium.comment.entity.CommentForm;
+import com.ll.medium.member.entity.Member;
+import com.ll.medium.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 @Controller
 @RequiredArgsConstructor
