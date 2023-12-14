@@ -2,7 +2,7 @@
 <div layout:fragment="content" class="container my-3">
     <div class="row my-3">
         <div class="col-6">
-            <a th:href="@{/post/write}" class="btn btn-primary">질문 등록하기</a>
+            <a th:href="@{/post/write}" class="btn btn-outline-primary">게시글 등록하기</a>
         </div>
     </div>
     <table class="table">
@@ -37,7 +37,7 @@
             <li class="page-item" th:classappend="${!articleList.hasPrevious} ? 'disabled'">
                 <a class="page-link"
                    th:href="@{|?page=${articleList.number}|}">
-                    <span>이전</span>
+                    <span>&laquo;</span>
                 </a>
             </li>
             <li th:each="pageNumber: ${#numbers.sequence(1, articleList.totalPages)}"
@@ -48,7 +48,7 @@
             </li>
             <li class="page-item" th:classappend="${!articleList.hasNext} ? 'disabled'">
                 <a class="page-link" th:href="@{|?page=${articleList.number}|}">
-                    <span>다음</span>
+                    <span>&raquo;</span>
                 </a>
             </li>
         </ul>

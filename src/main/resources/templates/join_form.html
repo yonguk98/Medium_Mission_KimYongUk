@@ -7,17 +7,17 @@
     </div>
     <form th:action="@{/member/join}" th:object="${memberCreateForm}" method="post">
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <div class="mb-3">
-            <label for="username" class="form-label">사용자ID</label>
-            <input type="text" th:field="*{username}" class="form-control">
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Username">
+            <label for="username" >사용자ID</label>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">비밀번호</label>
-            <input type="password" th:field="*{password}" class="form-control">
+        <div class="form-floating mb-3">
+            <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
+            <label for="password">비밀번호</label>
         </div>
-        <div class="mb-3">
-            <label for="passwordConfirm" class="form-label">비밀번호 확인</label>
-            <input type="password" th:field="*{passwordConfirm}" class="form-control">
+        <div class="form-floating mb-3">
+            <input type="password" th:field="*{passwordConfirm}" class="form-control" id="passwordConfirm" placeholder="Password">
+            <label for="passwordConfirm">비밀번호 확인</label>
         </div>
         <button type="submit" class="btn btn-primary">회원가입</button>
     </form>
