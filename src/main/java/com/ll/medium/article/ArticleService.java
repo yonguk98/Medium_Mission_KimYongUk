@@ -1,7 +1,7 @@
 package com.ll.medium.article;
 
 
-import com.ll.medium.DataNotFoundException;
+import com.ll.medium.global.DataNotFoundException;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.article.entity.ArticleForm;
 import com.ll.medium.member.entity.Member;

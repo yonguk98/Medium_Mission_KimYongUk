@@ -1,6 +1,6 @@
 package com.ll.medium.comment;
 
-import com.ll.medium.DataNotFoundException;
+import com.ll.medium.global.DataNotFoundException;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.comment.entity.Comment;
 import com.ll.medium.comment.entity.CommentForm;

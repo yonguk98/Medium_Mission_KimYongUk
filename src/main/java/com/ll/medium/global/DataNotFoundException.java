@@ -1,4 +1,4 @@
-package com.ll.medium;
+package com.ll.medium.global;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

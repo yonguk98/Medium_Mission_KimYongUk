@@ -1,4 +1,4 @@
-package com.ll.medium;
+package com.ll.medium.global;
 
 import com.ll.medium.article.entity.ArticleForm;
 import com.ll.medium.article.ArticleService;

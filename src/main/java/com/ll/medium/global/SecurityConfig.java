@@ -1,4 +1,4 @@
-package com.ll.medium;
+package com.ll.medium.global;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

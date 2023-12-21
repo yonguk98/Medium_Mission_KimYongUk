@@ -1,4 +1,4 @@
-package com.ll.medium;
+package com.ll.medium.global;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
