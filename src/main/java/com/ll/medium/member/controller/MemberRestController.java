@@ -1,6 +1,9 @@
 package com.ll.medium.member.controller;
 
+import com.ll.medium.global.JwtUtil;
+import com.ll.medium.member.dto.LoginRequestDto;
 import com.ll.medium.member.dto.MemberCreateForm;
+import com.ll.medium.member.entity.Member;
 import com.ll.medium.member.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,33 +40,33 @@ public class MemberRestController {
         memberService.create(form);
         return new ResponseEntity(HttpStatus.OK);
     }
-//
-//    @PostMapping("/login")
-//    public GlobalResponse<LoginResponseDto> login(@RequestBody LoginRequestDto dto) {
-//        GlobalResponse<Member> checkedResp = memberRestService.checkUsernameAndPassword(dto.getUsername(), dto.getPassword());
-//
-//        Member member = checkedResp.getData();
-//        String accessToken = JwtUtil.encode(
-//                60 * 10, // 1 minute
-//                Map.of(
-//                        "id", member.getId().toString(),
-//                        "username", member.getUsername(),
-//                        "authorities", member.getAuthoritiesAsStrList()
-//                )
-//        );
-//        String refreshToken = JwtUtil.encode(
-//                60 * 60 * 24, //1 day
-//                Map.of(
-//                        "id", member.getId().toString(),
-//                        "username", member.getUsername()
-//                )
-//        );
-//        memberRestService.setRefreshToken(member, refreshToken);
-//
-//        addCrossDomainCookie(accessToken, refreshToken);
-//
-//        return GlobalResponse.of("200", "로그인 성공.", new LoginResponseDto(member, accessToken, refreshToken));
-//    }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginRequestDto dto) {
+        Optional<Member> checkedResp = memberService.checkUsernameAndPassword(dto.getUsername(), dto.getPassword());
+
+        Member member = checkedResp.get();
+        String accessToken = JwtUtil.encode(
+                60 * 10, // 1 minute
+                Map.of(
+                        "id", member.getId().toString(),
+                        "username", member.getUsername(),
+                        "authorities", member.getAuthoritiesAsStrList()
+                )
+        );
+        String refreshToken = JwtUtil.encode(
+                60 * 60 * 24, //1 day
+                Map.of(
+                        "id", member.getId().toString(),
+                        "username", member.getUsername()
+                )
+        );
+        memberService.setRefreshToken(member, refreshToken);
+
+        addCrossDomainCookie(accessToken, refreshToken);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 //
 //    @PostMapping("/login/refresh")
 //    public GlobalResponse refreshAccessToken() {
@@ -130,25 +133,25 @@ public class MemberRestController {
 //        response.addHeader("Set-Cookie", cookie1.toString());
 //        response.addHeader("Set-Cookie", cookie2.toString());
 //    }
-//
-//    private void addCrossDomainCookie(String accessToken, String refreshToken) {
-//        ResponseCookie cookie1 = ResponseCookie.from("accessToken", accessToken)
-//                .path("/")
-//                .maxAge(60 * 10)
-//                .sameSite("None")
-//                .secure(true)
-//                .httpOnly(true)
-//                .build();
-//        ResponseCookie cookie2 = ResponseCookie.from("refreshToken", refreshToken)
-//                .path("/")
-//                .maxAge(60 * 60 * 24)
-//                .sameSite("None")
-//                .secure(true)
-//                .httpOnly(true)
-//                .build();
-//        response.addHeader("Set-Cookie", cookie1.toString());
-//        response.addHeader("Set-Cookie", cookie2.toString());
-//    }
+
+    private void addCrossDomainCookie(String accessToken, String refreshToken) {
+        ResponseCookie cookie1 = ResponseCookie.from("accessToken", accessToken)
+                .path("/")
+                .maxAge(60 * 10)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+        ResponseCookie cookie2 = ResponseCookie.from("refreshToken", refreshToken)
+                .path("/")
+                .maxAge(60 * 60 * 24)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+        response.addHeader("Set-Cookie", cookie1.toString());
+        response.addHeader("Set-Cookie", cookie2.toString());
+    }
 
 
 }
