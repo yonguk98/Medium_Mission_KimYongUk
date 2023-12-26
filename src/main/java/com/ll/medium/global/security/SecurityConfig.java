@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,11 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .csrf((csrf) -> csrf
@@ -27,13 +29,16 @@ public class SecurityConfig {
                 .headers((headers) -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-                .formLogin((formLogin) -> formLogin
-                        .loginPage("/member/login")
-                        .defaultSuccessUrl("/post/list"))
-                .logout((logout) -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                        .logoutSuccessUrl("/post/list")
-                        .invalidateHttpSession(true));
+//                .formLogin((formLogin) -> formLogin
+//                        .loginPage("/member/login")
+//                        .defaultSuccessUrl("/post/list"))
+//                .logout((logout) -> logout
+//                        .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+//                        .logoutSuccessUrl("/")
+//                        .invalidateHttpSession(true))
+                .sessionManagement((sessionManagement) ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
         return http.build();
     }
     @Bean

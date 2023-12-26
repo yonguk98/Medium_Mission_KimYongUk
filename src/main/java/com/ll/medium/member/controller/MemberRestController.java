@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequestMapping("/api/v1/member")
 public class MemberRestController {
 
-    MemberService memberService;
+    private final MemberService memberService;
 
     private final HttpServletResponse response;
     private final HttpServletRequest request;
