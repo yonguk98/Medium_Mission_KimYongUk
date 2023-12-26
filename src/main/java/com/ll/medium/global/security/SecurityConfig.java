@@ -29,13 +29,6 @@ public class SecurityConfig {
                 .headers((headers) -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-//                .formLogin((formLogin) -> formLogin
-//                        .loginPage("/member/login")
-//                        .defaultSuccessUrl("/post/list"))
-//                .logout((logout) -> logout
-//                        .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-//                        .logoutSuccessUrl("/")
-//                        .invalidateHttpSession(true))
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
