@@ -2,7 +2,7 @@ package com.ll.medium.member.service;
 
 import com.ll.medium.global.DataNotFoundException;
 import com.ll.medium.global.JwtUtil;
-import com.ll.medium.global.SecurityUser;
+import com.ll.medium.global.security.SecurityUser;
 import com.ll.medium.member.entity.Member;
 import com.ll.medium.member.dto.MemberCreateForm;
 import com.ll.medium.member.repository.MemberRepository;

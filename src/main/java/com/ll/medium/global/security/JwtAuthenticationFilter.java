@@ -1,4 +1,4 @@
-package com.ll.medium.global;
+package com.ll.medium.global.security;
 
 import com.ll.medium.member.service.MemberService;
 import jakarta.servlet.FilterChain;

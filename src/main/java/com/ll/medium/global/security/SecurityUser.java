@@ -1,4 +1,4 @@
-package com.ll.medium.global;
+package com.ll.medium.global.security;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
