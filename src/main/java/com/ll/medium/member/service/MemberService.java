@@ -79,4 +79,8 @@ public class MemberService {
     public void setRefreshToken(Member member, String refreshToken) {
         memberRepository.save(member.toBuilder().refreshToken(refreshToken).build());
     }
+
+    public Optional<Member> findMemberByRefreshToken(String refreshToken) {
+        return memberRepository.findByRefreshToken(refreshToken);
+    }
 }

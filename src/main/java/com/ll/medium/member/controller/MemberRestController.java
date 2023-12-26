@@ -67,41 +67,41 @@ public class MemberRestController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
-//
-//    @PostMapping("/login/refresh")
-//    public GlobalResponse refreshAccessToken() {
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies == null) {
-//            return GlobalResponse.of("401", "cookies not exist.");
-//        }
-//        Optional<Cookie> refreshTokenCookieOp = Arrays.stream(cookies)
-//                .filter(cookie -> cookie.getName().equals("refreshToken"))
-//                .findFirst();
-//        if (refreshTokenCookieOp.isEmpty()) {
-//            return GlobalResponse.of("401", "refreshToken not exist.");
-//        }
-//
-//        String refreshToken = refreshTokenCookieOp.get().getValue();
-//        Member member = memberRestService.findMemberByRefreshToken(refreshToken).get();
-//        String accessToken = JwtUtil.encode(
-//                60 * 10,
-//                Map.of(
-//                        "id", member.getId().toString(),
-//                        "username", member.getUsername(),
-//                        "authorities", member.getAuthoritiesAsStrList()
-//                )
-//        );
-//        ResponseCookie accessCookie = ResponseCookie.from("accessToken", accessToken)
-//                .path("/")
-//                .maxAge(60 * 10)
-//                .sameSite("None")
-//                .secure(true)
-//                .httpOnly(true)
-//                .build();
-//        response.addHeader("Set-Cookie", accessCookie.toString());
-//        return GlobalResponse.of("200", "refresh accessToken complete");
-//    }
-//
+
+    @PostMapping("/login/refresh")
+    public ResponseEntity refreshAccessToken() {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+        Optional<Cookie> refreshTokenCookieOp = Arrays.stream(cookies)
+                .filter(cookie -> cookie.getName().equals("refreshToken"))
+                .findFirst();
+        if (refreshTokenCookieOp.isEmpty()) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        String refreshToken = refreshTokenCookieOp.get().getValue();
+        Member member = memberService.findMemberByRefreshToken(refreshToken).get();
+        String accessToken = JwtUtil.encode(
+                60 * 10,
+                Map.of(
+                        "id", member.getId().toString(),
+                        "username", member.getUsername(),
+                        "authorities", member.getAuthoritiesAsStrList()
+                )
+        );
+        ResponseCookie accessCookie = ResponseCookie.from("accessToken", accessToken)
+                .path("/")
+                .maxAge(60 * 10)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+        response.addHeader("Set-Cookie", accessCookie.toString());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @PostMapping("/logout")
     public ResponseEntity logout() {
         removeCrossDomainCookie();
