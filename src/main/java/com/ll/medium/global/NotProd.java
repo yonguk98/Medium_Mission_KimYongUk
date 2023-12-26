@@ -2,7 +2,7 @@ package com.ll.medium.global;
 
 import com.ll.medium.article.entity.ArticleForm;
 import com.ll.medium.article.ArticleService;
-import com.ll.medium.member.entity.MemberCreateForm;
+import com.ll.medium.member.dto.MemberCreateForm;
 import com.ll.medium.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;

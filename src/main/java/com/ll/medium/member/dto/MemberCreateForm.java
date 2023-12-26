@@ -1,4 +1,4 @@
-package com.ll.medium.member.entity;
+package com.ll.medium.member.dto;
 
 
 import jakarta.validation.constraints.NotEmpty;

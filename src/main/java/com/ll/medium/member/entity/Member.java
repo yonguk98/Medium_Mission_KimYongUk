@@ -13,10 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @Column(unique = true)
-    String username;
+    private String username;
 
-    String password;
+    private String password;
+
+    private String refreshToken;
 }
