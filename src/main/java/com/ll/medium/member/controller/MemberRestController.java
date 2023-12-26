@@ -47,7 +47,7 @@ public class MemberRestController {
 
         Member member = checkedResp.get();
         String accessToken = JwtUtil.encode(
-                60 * 10, // 1 minute
+                60 * 10 * 30, // 30 minute
                 Map.of(
                         "id", member.getId().toString(),
                         "username", member.getUsername(),
@@ -55,7 +55,7 @@ public class MemberRestController {
                 )
         );
         String refreshToken = JwtUtil.encode(
-                60 * 60 * 24, //1 day
+                60 * 60 * 24 * 30, // 30 day
                 Map.of(
                         "id", member.getId().toString(),
                         "username", member.getUsername()
@@ -102,37 +102,30 @@ public class MemberRestController {
 //        return GlobalResponse.of("200", "refresh accessToken complete");
 //    }
 //
-//    @PostMapping("/logout")
-//    public GlobalResponse logout() {
-//
-//        removeCrossDomainCookie();
-//        return GlobalResponse.of("200", "로그아웃 성공");
-//    }
-//
-//    @PreAuthorize("isAuthenticated()")
-//    @GetMapping("/test")
-//    public GlobalResponse test(Principal principal) {
-//        return GlobalResponse.of("200", "test", principal.getName());
-//    }
-//
-//    private void removeCrossDomainCookie() {
-//        ResponseCookie cookie1 = ResponseCookie.from("accessToken", null)
-//                .path("/")
-//                .maxAge(0)
-//                .sameSite("None")
-//                .secure(true)
-//                .httpOnly(true)
-//                .build();
-//        ResponseCookie cookie2 = ResponseCookie.from("refreshToken", null)
-//                .path("/")
-//                .maxAge(0)
-//                .sameSite("None")
-//                .secure(true)
-//                .httpOnly(true)
-//                .build();
-//        response.addHeader("Set-Cookie", cookie1.toString());
-//        response.addHeader("Set-Cookie", cookie2.toString());
-//    }
+    @PostMapping("/logout")
+    public ResponseEntity logout() {
+        removeCrossDomainCookie();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private void removeCrossDomainCookie() {
+        ResponseCookie cookie1 = ResponseCookie.from("accessToken", null)
+                .path("/")
+                .maxAge(0)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+        ResponseCookie cookie2 = ResponseCookie.from("refreshToken", null)
+                .path("/")
+                .maxAge(0)
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+        response.addHeader("Set-Cookie", cookie1.toString());
+        response.addHeader("Set-Cookie", cookie2.toString());
+    }
 
     private void addCrossDomainCookie(String accessToken, String refreshToken) {
         ResponseCookie cookie1 = ResponseCookie.from("accessToken", accessToken)
