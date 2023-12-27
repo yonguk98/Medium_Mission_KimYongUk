@@ -131,9 +131,8 @@ public class ArticleController {
 
     @GetMapping("/b/{username}")
     public String articlesByUsername(@PathVariable("username") String username, Model model){
-        Member writer = memberService.getMemberByUsername(username);
 
-        List<Article> articles = articleService.getAllArticlesByWriter(writer);
+        List<Article> articles = articleService.getAllArticlesByWriter(username);
 
         if(articles.size()==0){
             return "redirect:/post/list";
@@ -144,9 +143,8 @@ public class ArticleController {
 
     @GetMapping("/b/{username}/{articleId}")
     public String articleDetailByUsernameAndArticleId(@PathVariable("username") String username, @PathVariable("articleId") Integer articleId, Model model){
-        Member writer = memberService.getMemberByUsername(username);
 
-        List<Article> articles = articleService.getAllArticlesByWriter(writer);
+        List<Article> articles = articleService.getAllArticlesByWriter(username);
         if(articles.size()==0){
             return "redirect:/post/list";
         }

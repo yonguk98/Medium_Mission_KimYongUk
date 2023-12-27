@@ -44,8 +44,8 @@ public class ArticleRestController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{articleId}")
-    public ResponseEntity articleModify(@PathVariable Integer articleId, ArticleForm articleForm, Principal principal){
+    @PutMapping ("/{articleId}")
+    public ResponseEntity articleModify(@PathVariable Integer articleId, @RequestBody ArticleForm articleForm, Principal principal){
 
         Article article = articleService.getArticleById(articleId);
 
@@ -70,6 +70,22 @@ public class ArticleRestController {
 
         articleService.deleteArticle(article);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{username}")
+    public ResponseEntity<List<Article>> articleByUsername(@PathVariable String username){
+
+        List<Article> articleList = articleService.getAllArticlesByWriter(username);
+        return new ResponseEntity(articleList, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{username}/{articleId}")
+    public ResponseEntity<Article> articleByUsernameAndId(@PathVariable String username, @PathVariable Integer articleId){
+        List<Article> articleList = articleService.getAllArticlesByWriter(username);
+        if(articleId<=0 || articleId > articleList.size()){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(articleList.get(articleId-1),HttpStatus.OK);
     }
 
 }

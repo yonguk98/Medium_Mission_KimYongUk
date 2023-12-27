@@ -76,7 +76,7 @@ public class ArticleService {
         articleRepository.delete(article);
     }
 
-    public List<Article> getAllArticlesByWriter(Member writer) {
+    public List<Article> getAllArticlesByWriter(String writer) {
         // null 이면??
         return articleRepository.findAllByWriter(writer);
     }
