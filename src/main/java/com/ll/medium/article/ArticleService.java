@@ -62,8 +62,7 @@ public class ArticleService {
         return article.get();
     }
 
-    public void modify(Integer articleId, ArticleForm articleForm) {
-        Article article = getArticleById(articleId);
+    public void modify(Article article, ArticleForm articleForm) {
         article = article.toBuilder()
                 .title(articleForm.getTitle())
                 .body(articleForm.getBody())

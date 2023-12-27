@@ -43,10 +43,32 @@ public class ArticleRestController {
         return new ResponseEntity(article, HttpStatus.OK);
     }
 
-    @PostMapping("/{articleId}/modify")
-    public ResponseEntity articleModify(@PathVariable Integer articleId, ArticleForm articleForm){
-        articleService.modify(articleId,articleForm);
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{articleId}")
+    public ResponseEntity articleModify(@PathVariable Integer articleId, ArticleForm articleForm, Principal principal){
 
+        Article article = articleService.getArticleById(articleId);
+
+        if(!article.getWriter().equals(principal.getName())) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        articleService.modify(article,articleForm);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity articleDelete(@PathVariable Integer articleId, Principal principal){
+
+        Article article = articleService.getArticleById(articleId);
+
+        if(!article.getWriter().equals(principal.getName())) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        articleService.deleteArticle(article);
         return new ResponseEntity(HttpStatus.OK);
     }
 
