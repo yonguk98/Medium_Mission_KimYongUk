@@ -14,7 +14,7 @@ public class ArticleForm {
     private String title;
     @NotEmpty(message = "내용을 입력해주세요")
     private String body;
-    private Member writer;
+    private String writer;
     private LocalDateTime dateTime = LocalDateTime.now();
     private boolean publish = true;
 }

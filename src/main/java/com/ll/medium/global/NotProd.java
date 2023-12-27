@@ -20,15 +20,15 @@ public class NotProd {
         int userCount = 10;
         for (int i = 0; i < userCount; i++) {
             MemberCreateForm memberCreateForm = new MemberCreateForm();
-            memberCreateForm.setUsername("user" + i + 1);
+            memberCreateForm.setUsername("user" + (i + 1));
             memberCreateForm.setPassword("1234");
             memberService.create(memberCreateForm);
         }
         for (int i = 0; i < 30; i++) {
             ArticleForm articleForm = new ArticleForm();
-            articleForm.setTitle("title" + i + 1);
-            articleForm.setBody("body" + i + 1);
-            articleForm.setWriter(memberService.getMemberByUsername("user" + i % userCount + 1));
+            articleForm.setTitle("title" + (i + 1));
+            articleForm.setBody("body" + (i + 1));
+            articleForm.setWriter("user" + (i % userCount + 1));
             articleService.createArticle(articleForm);
         }
         return args -> {

@@ -25,8 +25,7 @@ public class Article {
 
     private String body;
 
-    @ManyToOne
-    private Member writer;
+    private String writer;
 
     private LocalDateTime dateTime;
 

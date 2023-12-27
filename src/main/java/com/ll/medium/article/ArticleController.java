@@ -54,7 +54,7 @@ public class ArticleController {
 
         try{
             Member member = memberService.getMemberByUsername(principal.getName());
-            articleForm.setWriter(member);
+            articleForm.setWriter(member.getUsername());
         } catch (NullPointerException e){
             articleForm.setWriter(null);
         }
@@ -84,7 +84,7 @@ public class ArticleController {
     public String modifyArticle(@PathVariable("articleId") Integer articleId, Principal principal, ArticleForm articleForm){
         Article article = articleService.getArticleById(articleId);
 
-        if(!article.getWriter().getUsername().equals(principal.getName())){
+        if(!article.getWriter().equals(principal.getName())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         articleForm.setTitle(article.getTitle());
@@ -101,7 +101,7 @@ public class ArticleController {
 
         Article article = articleService.getArticleById(articleId);
 
-        if(!article.getWriter().getUsername().equals(principal.getName())){
+        if(!article.getWriter().equals(principal.getName())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
 
@@ -120,7 +120,7 @@ public class ArticleController {
 
         Article article = articleService.getArticleById(id);
 
-        if(!article.getWriter().getUsername().equals(principal.getName())){
+        if(!article.getWriter().equals(principal.getName())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
 
