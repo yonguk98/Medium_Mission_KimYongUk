@@ -43,4 +43,11 @@ public class ArticleRestController {
         return new ResponseEntity(article, HttpStatus.OK);
     }
 
+    @PostMapping("/{articleId}/modify")
+    public ResponseEntity articleModify(@PathVariable Integer articleId, ArticleForm articleForm){
+        articleService.modify(articleId,articleForm);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
