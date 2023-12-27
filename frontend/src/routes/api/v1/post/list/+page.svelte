@@ -20,7 +20,7 @@
 				<tr>
 					<td>{item.id}</td>
 					<td>{item.writer.username}</td>
-					<td>{item.title}</td>
+					<td><a href={item.id}>{item.title}</a></td>
 					<td>{item.hit}</td>
 					<td>{item.dateTime}</td>
 				</tr>
