@@ -20,13 +20,13 @@ public class ArticleRestController {
     private final ArticleService articleService;
 
     @GetMapping("/list")
-    public List<Article> list(){
+    public List<Article> list() {
         return articleService.getAllArticles();
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/write")
-    public ResponseEntity writeArticle(@RequestBody ArticleForm articleForm, Principal principal){
+    public ResponseEntity writeArticle(@RequestBody ArticleForm articleForm, Principal principal) {
 
         articleForm.setWriter(principal.getName());
         articleService.createArticle(articleForm);
@@ -35,7 +35,7 @@ public class ArticleRestController {
     }
 
     @GetMapping("/{articleId}")
-    public ResponseEntity<Article> articleDetail(@PathVariable Integer articleId){
+    public ResponseEntity<Article> articleDetail(@PathVariable Integer articleId) {
 
         Article article = articleService.getArticleById(articleId);
         articleService.addHit(article);
@@ -46,27 +46,27 @@ public class ArticleRestController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PutMapping ("/{articleId}")
-    public ResponseEntity articleModify(@PathVariable Integer articleId, @RequestBody ArticleForm articleForm, Principal principal){
+    @PutMapping("/{articleId}")
+    public ResponseEntity articleModify(@PathVariable Integer articleId, @RequestBody ArticleForm articleForm, Principal principal) {
 
         Article article = articleService.getArticleById(articleId);
 
-        if(!article.getWriter().equals(principal.getName())) {
+        if (!article.getWriter().equals(principal.getName())) {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
-        articleService.modify(article,articleForm);
+        articleService.modify(article, articleForm);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{articleId}")
-    public ResponseEntity articleDelete(@PathVariable Integer articleId, Principal principal){
+    public ResponseEntity articleDelete(@PathVariable Integer articleId, Principal principal) {
 
         Article article = articleService.getArticleById(articleId);
 
-        if(!article.getWriter().equals(principal.getName())) {
+        if (!article.getWriter().equals(principal.getName())) {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
@@ -75,19 +75,19 @@ public class ArticleRestController {
     }
 
     @GetMapping("/find/{username}")
-    public ResponseEntity<List<Article>> articleByUsername(@PathVariable String username){
+    public ResponseEntity<List<Article>> articleByUsername(@PathVariable String username) {
 
         List<Article> articleList = articleService.getAllArticlesByWriter(username);
         return new ResponseEntity(articleList, HttpStatus.OK);
     }
 
     @GetMapping("/find/{username}/{articleId}")
-    public ResponseEntity<Article> articleByUsernameAndId(@PathVariable String username, @PathVariable Integer articleId){
+    public ResponseEntity<Article> articleByUsernameAndId(@PathVariable String username, @PathVariable Integer articleId) {
         List<Article> articleList = articleService.getAllArticlesByWriter(username);
-        if(articleId<=0 || articleId > articleList.size()){
+        if (articleId <= 0 || articleId > articleList.size()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(articleList.get(articleId-1),HttpStatus.OK);
+        return new ResponseEntity(articleList.get(articleId - 1), HttpStatus.OK);
     }
 
 }

@@ -24,7 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void create(MemberCreateForm memberCreateForm){
+    public void create(MemberCreateForm memberCreateForm) {
         Member member = Member.builder()
                 .username(memberCreateForm.getUsername())
                 .password(passwordEncoder.encode(memberCreateForm.getPassword()))
@@ -33,12 +33,12 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Member getMemberByUsername(String username){
+    public Member getMemberByUsername(String username) {
         Optional<Member> member = memberRepository.findByUsername(username);
 
-        if(member.isPresent()){
+        if (member.isPresent()) {
             return member.get();
-        }else{
+        } else {
             throw new DataNotFoundException("member not found");
         }
     }

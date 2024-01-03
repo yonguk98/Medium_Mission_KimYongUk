@@ -17,7 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(unique = true)
