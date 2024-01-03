@@ -34,7 +34,7 @@ public class MemberService {
         return member;
     }
 
-    public void setMembership(Member member, boolean status){
+    public void setMembership(Member member, boolean status) {
         memberRepository.save(member.toBuilder().isPaid(status).build());
     }
 
