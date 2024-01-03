@@ -17,4 +17,5 @@ public class ArticleForm {
     private String writer;
     private LocalDateTime dateTime = LocalDateTime.now();
     private boolean publish = true;
+    private boolean isPaid = false;
 }

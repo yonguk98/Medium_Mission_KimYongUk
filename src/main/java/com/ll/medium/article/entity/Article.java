@@ -30,6 +30,9 @@ public class Article {
     private LocalDateTime dateTime;
 
     @Builder.Default
+    private boolean isPaid = false;
+
+    @Builder.Default
     private Long hit = 0L;
 
     @Builder.Default

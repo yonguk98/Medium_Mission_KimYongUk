@@ -40,6 +40,8 @@ public class ArticleRestController {
         Article article = articleService.getArticleById(articleId);
         articleService.addHit(article);
 
+        article = articleService.checkPaid(article);
+
         return new ResponseEntity(article, HttpStatus.OK);
     }
 
