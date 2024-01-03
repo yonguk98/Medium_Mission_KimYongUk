@@ -24,13 +24,18 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void create(MemberCreateForm memberCreateForm) {
+    public Member create(MemberCreateForm memberCreateForm) {
         Member member = Member.builder()
                 .username(memberCreateForm.getUsername())
                 .password(passwordEncoder.encode(memberCreateForm.getPassword()))
                 .build();
 
         memberRepository.save(member);
+        return member;
+    }
+
+    public void setMembership(Member member, boolean status){
+        memberRepository.save(member.toBuilder().isPaid(status).build());
     }
 
     public Member getMemberByUsername(String username) {
