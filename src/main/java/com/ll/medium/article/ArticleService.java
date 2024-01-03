@@ -99,7 +99,7 @@ public class ArticleService {
 
     public Article checkPaid(Article article) {
         if (article.isPaid()) {
-            article.toBuilder().body("이 글은 유료멤버십전용 입니다.");
+            return article.toBuilder().body("이 글은 유료멤버십전용 입니다.").build();
         }
         return article;
     }

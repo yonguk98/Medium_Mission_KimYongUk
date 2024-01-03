@@ -33,6 +33,7 @@ public class NotProd {
             articleForm.setTitle("title" + (i + 1));
             articleForm.setBody("body" + (i + 1));
             articleForm.setWriter("user" + (i % userCount + 1));
+            articleForm.setPaid(true);
             articleService.createArticle(articleForm);
         }
         return args -> {
