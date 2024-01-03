@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,6 +26,9 @@ public class Member {
     private String password;
 
     private String refreshToken;
+
+    @Builder.Default
+    private boolean isPaid = false;
 
     @SuppressWarnings("JpaAttributeTypeInspection")
     public List<? extends GrantedAuthority> getAuthorities() {
