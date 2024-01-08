@@ -1,7 +1,0 @@
-{
-	"/": [],
-	"/api/v1/post/list": [],
-	"/api/v1/post/[articleId]": [
-		"src/routes/api/v1/post/[articleId]/+page.js"
-	]
-}
