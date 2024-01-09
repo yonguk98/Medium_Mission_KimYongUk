@@ -30,11 +30,11 @@ public class CommentService {
         return commentRepository.findAllByArticle(article);
     }
 
-    public void createComment(CommentForm commentForm, Article article, Member member){
+    public void createComment(CommentForm commentForm, Article article, String writer){
         Comment comment = Comment.builder()
                 .body(commentForm.getBody())
                 .dateTime(commentForm.getLocalDateTime())
-                .writer(member)
+                .writer(writer)
                 .article(article)
                 .build();
         commentRepository.save(comment);

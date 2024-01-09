@@ -22,9 +22,9 @@ public class Comment {
     private String body;
     private LocalDateTime dateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "article_id")
     private Article article;
 
-    @ManyToOne
-    private Member writer;
+    private String writer;
 }

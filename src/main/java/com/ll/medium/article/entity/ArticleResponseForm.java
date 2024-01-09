@@ -1,2 +1,4 @@
-package com.ll.medium.article.entity;public class ArticleRequestForm {
+package com.ll.medium.article.entity;
+
+public class ArticleResponseForm {
 }
