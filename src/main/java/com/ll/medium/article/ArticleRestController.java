@@ -1,5 +1,6 @@
 package com.ll.medium.article;
 
+import com.ll.medium.article.dto.ArticleResponseForm;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.article.entity.ArticleForm;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -20,7 +21,7 @@ public class ArticleRestController {
     private final ArticleService articleService;
 
     @GetMapping("/list")
-    public List<Article> list() {
+    public List<ArticleResponseForm> list() {
         return articleService.getAllArticles();
     }
 

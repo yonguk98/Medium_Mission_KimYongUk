@@ -2,6 +2,8 @@ package com.ll.medium.global;
 
 import com.ll.medium.article.entity.ArticleForm;
 import com.ll.medium.article.ArticleService;
+import com.ll.medium.comment.CommentService;
+import com.ll.medium.comment.entity.CommentForm;
 import com.ll.medium.member.dto.MemberCreateForm;
 import com.ll.medium.member.entity.Member;
 import com.ll.medium.member.service.MemberService;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class NotProd {
     private final ArticleService articleService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     @Bean
     public ApplicationRunner initNotProd() {
@@ -36,6 +39,12 @@ public class NotProd {
             articleForm.setPaid(true);
             articleService.createArticle(articleForm);
         }
+        for (int i = 0; i < 10; i++) {
+            CommentForm commentForm = new CommentForm();
+            commentForm.setBody("test comment");
+            commentService.createComment(commentForm,articleService.getArticleById(i+1),"user1");
+        }
+
         return args -> {
         };
     }

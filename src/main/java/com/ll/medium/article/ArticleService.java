@@ -1,6 +1,7 @@
 package com.ll.medium.article;
 
 
+import com.ll.medium.article.dto.ArticleResponseForm;
 import com.ll.medium.global.DataNotFoundException;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.article.entity.ArticleForm;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,13 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final MemberService memberService;
 
-    public List<Article> getAllArticles() {
-        return articleRepository.findAll();
+    public List<ArticleResponseForm> getAllArticles() {
+        List<Article> articleList = articleRepository.findAll();
+        List<ArticleResponseForm> articleResponseFormList = new ArrayList<>();
+        for (Article a : articleList) {
+            articleResponseFormList.add(new ArticleResponseForm(a));
+        }
+        return articleResponseFormList;
     }
 
     public Page<Article> getAllArticlesByUsername(int page, Member member) {

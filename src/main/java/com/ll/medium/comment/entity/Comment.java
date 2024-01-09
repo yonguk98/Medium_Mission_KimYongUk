@@ -1,5 +1,6 @@
 package com.ll.medium.comment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.member.entity.Member;
 import jakarta.persistence.*;
@@ -22,9 +23,9 @@ public class Comment {
     private String body;
     private LocalDateTime dateTime;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     private Article article;
 
-    @ManyToOne
-    private Member writer;
+    private String writer;
 }
