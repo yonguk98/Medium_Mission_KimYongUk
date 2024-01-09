@@ -1,5 +1,6 @@
 package com.ll.medium.comment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.medium.article.entity.Article;
 import com.ll.medium.member.entity.Member;
 import jakarta.persistence.*;
@@ -22,8 +23,8 @@ public class Comment {
     private String body;
     private LocalDateTime dateTime;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "article_id")
     private Article article;
 
     private String writer;
