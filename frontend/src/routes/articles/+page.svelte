@@ -35,7 +35,7 @@
                 <div>{article.writer}</div>
             </td>
             <td>
-                <a class="font-bold" on:click={(event)=> goto('/article/' + article.id)}>{article.title}</a>
+                <a class="font-bold" on:click={(event)=> goto('/articles/' + article.id)}>{article.title}</a>
             </td>
             <td>Purple</td>
             <th>
