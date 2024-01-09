@@ -39,9 +39,11 @@ public class NotProd {
             articleForm.setPaid(true);
             articleService.createArticle(articleForm);
         }
-        CommentForm commentForm = new CommentForm();
-        commentForm.setBody("test comment");
-        commentService.createComment(commentForm,articleService.getArticleById(1),"user1");
+        for (int i = 0; i < 10; i++) {
+            CommentForm commentForm = new CommentForm();
+            commentForm.setBody("test comment");
+            commentService.createComment(commentForm,articleService.getArticleById(i+1),"user1");
+        }
 
         return args -> {
         };
