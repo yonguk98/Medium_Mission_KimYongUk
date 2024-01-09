@@ -23,40 +23,42 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final MemberService memberService;
 
-    public List<Article> getAllArticles(){
+    public List<Article> getAllArticles() {
         return articleRepository.findAll();
     }
 
-    public Page<Article> getAllArticlesByUsername(int page, Member member){
-        Pageable pageable = PageRequest.of(page,30);
-        return articleRepository.findAllByWriter(pageable,member);
+    public Page<Article> getAllArticlesByUsername(int page, Member member) {
+        Pageable pageable = PageRequest.of(page, 30);
+        return articleRepository.findAllByWriter(pageable, member);
     }
 
     public Page<Article> getPageList(int page) {
         Pageable pageable = PageRequest.of(page, 30);
         return articleRepository.findAll(pageable);
     }
-    public Page<Article> getPublishedPageList(int page){
+
+    public Page<Article> getPublishedPageList(int page) {
         Pageable pageable = PageRequest.of(page, 30);
         return articleRepository.findAllByIsPublished(pageable, true);
     }
 
-    public void createArticle(ArticleForm articleForm){
+    public void createArticle(ArticleForm articleForm) {
         Article article = Article.builder()
                 .title(articleForm.getTitle())
                 .body(articleForm.getBody())
                 .writer(articleForm.getWriter())
                 .isPublished(articleForm.isPublish())
                 .dateTime(LocalDateTime.now())
+                .isPaid(articleForm.isPaid())
                 .build();
 
         articleRepository.save(article);
     }
 
-    public Article getArticleById(Integer id){
+    public Article getArticleById(Integer id) {
         Optional<Article> article = articleRepository.getArticleById(id);
 
-        if(!article.isPresent()){
+        if (!article.isPresent()) {
             throw new DataNotFoundException("해당하는 게시글이 없습니다.");
         }
         return article.get();
@@ -76,21 +78,30 @@ public class ArticleService {
         articleRepository.delete(article);
     }
 
-    public List<Article> getAllArticlesByWriter(Member writer) {
+    public List<Article> getAllArticlesByWriter(String writer) {
         // null 이면??
         return articleRepository.findAllByWriter(writer);
     }
 
     public void addHit(Article article) {
-        articleRepository.save(article.toBuilder().hit(article.getHit()+1).build());
+        articleRepository.save(article.toBuilder().hit(article.getHit() + 1).build());
     }
-    public void addLike(Article article, Member member){
+
+    public void addLike(Article article, Member member) {
         article.getLike().add(member);
         articleRepository.save(article);
     }
-    public void subLike(Article article, Member member){
+
+    public void subLike(Article article, Member member) {
         article.getLike().remove(member);
         articleRepository.save(article);
+    }
+
+    public Article checkPaid(Article article) {
+        if (article.isPaid()) {
+            return article.toBuilder().body("이 글은 유료멤버십전용 입니다.").build();
+        }
+        return article;
     }
 
 }

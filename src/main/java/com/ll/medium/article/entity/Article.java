@@ -25,10 +25,12 @@ public class Article {
 
     private String body;
 
-    @ManyToOne
-    private Member writer;
+    private String writer;
 
     private LocalDateTime dateTime;
+
+    @Builder.Default
+    private boolean isPaid = false;
 
     @Builder.Default
     private Long hit = 0L;

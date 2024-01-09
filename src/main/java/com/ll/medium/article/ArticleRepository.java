@@ -15,7 +15,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     Optional<Article> getArticleById(Integer id);
 
-    List<Article> findAllByWriter(Member writer);
+    List<Article> findAllByWriter(String writer);
 
     Page<Article> findAll(Pageable pageable);
 
