@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ArticleResponseForm {
+    private Long id;
     private String title;
     private String body;
     private String writer;
@@ -19,6 +20,7 @@ public class ArticleResponseForm {
     private List<Comment> commentList;
 
     public ArticleResponseForm(Article article){
+        this.id = article.getId();
         this.title = article.getTitle();
         this.body = article.getBody();
         this.writer = article.getWriter();
