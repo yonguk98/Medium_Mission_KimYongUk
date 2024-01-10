@@ -30,8 +30,8 @@
             <p>{comment.body}</p>
             <div class="text-end">
                 <span>
-                    <button class="btn btn-square btn-primary">수정</button>
-                    <button class="btn btn-square btn-primary">삭제</button>
+                    <button class="btn btn-square btn-info">수정</button>
+                    <button class="btn btn-square btn-error">삭제</button>
                 </span>
             </div>
         </div>

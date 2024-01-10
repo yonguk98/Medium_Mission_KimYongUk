@@ -1,8 +1,12 @@
+
 <script>
     import '../app.css';
     import Navbar from './navbar.svelte';
-</script>
+    import toast, { Toaster } from 'svelte-french-toast';
 
+</script>
 <Navbar/>
+<Toaster/>
+
 
 <slot></slot>

@@ -23,7 +23,7 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn m-1 min-w-20">Login</a>
-        <a class="btn m-1 min-w-20">Sign in</a>
+        <btn class="btn btn-primary m-1 min-w-20 " on:click={e=>goto('/members/login')}>Login</btn>
+        <btn class="btn btn-secondary m-1 min-w-20" on:click={e=>goto('/members/signup')}>Sign up</btn>
     </div>
 </div>
