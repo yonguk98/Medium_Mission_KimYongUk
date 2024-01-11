@@ -18,13 +18,10 @@
                 body: JSON.stringify(loginData),
             })
                 .then((res) => {
-                    console.log(res);
-                    res.json();
-                })
-                .then((res) => {
-                    if(res.resultCode == '200'){
+                    if(res.status === 200){
                         console.log(res);
-                        toast.success(res.msg);
+                        toast.success("login success!");
+                        goto('/');
                     }
                 })
         } else {
